@@ -12,6 +12,40 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const handleAccountsChanged = (accounts) => {
+    if (accounts.length === 0) {
+      disconnectWallet();
+    } else {
+      setWalletAddress(accounts[0]);
+    }
+  };
+
+  const handleChainChanged = () => {
+    window.location.reload();
+  };
+
+  const disconnectWallet = () => {
+    setWalletAddress(null);
+    setNetwork(null);
+    setContract(null);
+    setCount(null);
+    setError("");
+  };
+
+  useEffect(() => {
+    if (window.ethereum) {
+      window.ethereum.on("accountsChanged", handleAccountsChanged);
+      window.ethereum.on("chainChanged", handleChainChanged);
+    }
+
+    return () => {
+      if (window.ethereum) {
+        window.ethereum.removeListener("accountsChanged", handleAccountsChanged);
+        window.ethereum.removeListener("chainChanged", handleChainChanged);
+      }
+    };
+  }, []);
+
   const connectWallet = async () => {
     setLoading(true);
     setError("");
@@ -37,6 +71,12 @@ function App() {
 
         const currentCount = await counterContract.count();
         setCount(currentCount.toString());
+
+        // Listen for the CounterChanged event
+        counterContract.on("CounterChanged", (newCount) => {
+          setCount(newCount.toString());
+        });
+
       } catch (err) {
         console.error(err);
         setError("Failed to connect wallet or fetch data. See console for details.");
@@ -53,8 +93,21 @@ function App() {
     try {
       const tx = await contract.increment();
       await tx.wait();
-      const updatedCount = await contract.count();
-      setCount(updatedCount.toString());
+      // The UI will be updated by the event listener, so we don't need to manually fetch the count here.
+    } catch (err) {
+      console.error(err);
+      setError("Transaction failed. See console for details.");
+    }
+    setLoading(false);
+  };
+
+  const decrement = async () => {
+    if (!contract) return;
+    setLoading(true);
+    try {
+      const tx = await contract.decrement();
+      await tx.wait();
+      // The UI will be updated by the event listener, so we don't need to manually fetch the count here.
     } catch (err) {
       console.error(err);
       setError("Transaction failed. See console for details.");
@@ -83,8 +136,16 @@ function App() {
               <h2>Counter Value</h2>
               <p className="count">{count}</p>
             </div>
-            <button onClick={increment} className="action-button" disabled={loading}>
-              {loading ? "Processing..." : "Hit Do Quickly"}
+            <div className="button-group">
+              <button onClick={increment} className="action-button" disabled={loading}>
+                {loading ? "Processing..." : "Increment"}
+              </button>
+              <button onClick={decrement} className="action-button" disabled={loading}>
+                {loading ? "Processing..." : "Decrement"}
+              </button>
+            </div>
+            <button onClick={disconnectWallet} className="disconnect-button">
+              Disconnect
             </button>
           </div>
         )}
