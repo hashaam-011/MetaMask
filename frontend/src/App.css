@@ -158,3 +158,305 @@
   color: #ff6b6b;
   margin-top: 20px;
 }
+
+.timestamp {
+  color: #888;
+  font-size: 0.95rem;
+  margin-top: 10px;
+}
+
+.Dashboard {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.Sidebar {
+  width: 260px;
+  background: #232946;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+}
+
+.Sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.Sidebar-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.Sidebar-user {
+  width: 100%;
+  background: #2d3250;
+  border-radius: 10px;
+  padding: 20px 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.Sidebar-account, .Sidebar-network {
+  font-size: 0.95rem;
+  word-break: break-all;
+  margin-bottom: 10px;
+}
+
+.Dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+  padding: 40px 32px;
+  margin-top: 0;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+}
+
+.counter-display {
+  padding: 20px 0 10px 0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+body {
+  background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+}
+
+.Dashboard {
+  display: flex;
+  min-height: 100vh;
+  background: none;
+}
+
+.Sidebar {
+  width: 260px;
+  background: linear-gradient(135deg, #232946 60%, #3b3f5c 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px 0 24px 0;
+  box-shadow: 2px 0 16px rgba(35,41,70,0.10);
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+
+.Sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.Sidebar-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.14);
+  border: 2px solid #fff;
+}
+
+.Sidebar-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0;
+  color: #eebbc3;
+}
+
+.Sidebar-user {
+  width: 90%;
+  background: rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 22px 12px 18px 12px;
+  margin-bottom: 24px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.Sidebar-account, .Sidebar-network {
+  font-size: 1rem;
+  word-break: break-all;
+  margin-bottom: 10px;
+  color: #eebbc3;
+}
+
+.connect-button, .disconnect-button {
+  background: linear-gradient(90deg, #eebbc3 0%, #a3cef1 100%);
+  color: #232946;
+  border: none;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 18px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(238,187,195,0.10);
+}
+.connect-button:hover, .disconnect-button:hover {
+  background: linear-gradient(90deg, #a3cef1 0%, #eebbc3 100%);
+  color: #232946;
+  box-shadow: 0 4px 16px rgba(163,206,241,0.18);
+}
+
+.Dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px 40px 24px;
+  background: none;
+}
+
+.card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 32px rgba(35,41,70,0.10);
+  padding: 48px 36px 36px 36px;
+  margin-top: 0;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: center;
+  border: 1.5px solid #e0e7ff;
+}
+
+.counter-display {
+  padding: 24px 0 12px 0;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #f8fafc 60%, #e0e7ff 100%);
+  border: 1px solid #e0e7ff;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(224,231,255,0.10);
+}
+
+.counter-display h2 {
+  margin: 0 0 12px 0;
+  color: #232946;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.count {
+  font-size: 4.2rem;
+  font-weight: 800;
+  color: #eebbc3;
+  margin: 0;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px rgba(238,187,195,0.10);
+}
+
+.timestamp {
+  color: #6b7280;
+  font-size: 1.05rem;
+  margin-top: 14px;
+  font-style: italic;
+}
+
+.action-button {
+  background: linear-gradient(90deg, #a3cef1 0%, #eebbc3 100%);
+  border: none;
+  border-radius: 8px;
+  color: #232946;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 0;
+  padding: 14px 32px;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+  box-shadow: 0 2px 8px rgba(163,206,241,0.10);
+}
+.action-button:hover:not(:disabled) {
+  background: linear-gradient(90deg, #eebbc3 0%, #a3cef1 100%);
+  color: #232946;
+  box-shadow: 0 4px 16px rgba(238,187,195,0.18);
+  transform: translateY(-2px) scale(1.03);
+}
+.action-button:disabled {
+  background: #e0e7ff;
+  color: #b0b7c3;
+  cursor: not-allowed;
+}
+
+.button-group {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.error-message {
+  color: #ff6b6b;
+  margin-top: 24px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: #fff0f0;
+  border-radius: 8px;
+  padding: 10px 18px;
+  border: 1px solid #ffe0e0;
+  box-shadow: 0 2px 8px rgba(255,107,107,0.06);
+}
+
+@media (max-width: 800px) {
+  .Dashboard {
+    flex-direction: column;
+  }
+  .Sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 10px;
+    box-shadow: none;
+    border-radius: 0 0 24px 24px;
+  }
+  .Sidebar-header {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0;
+  }
+  .Dashboard-main {
+    padding: 20px 5px;
+  }
+  .card {
+    padding: 24px 8px;
+  }
+}

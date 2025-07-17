@@ -11,6 +11,7 @@ function App() {
   const [contract, setContract] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [timestamp, setTimestamp] = useState(null);
 
   const handleAccountsChanged = (accounts) => {
     if (accounts.length === 0) {
@@ -76,6 +77,10 @@ function App() {
         counterContract.on("CounterChanged", (newCount) => {
           setCount(newCount.toString());
         });
+        // Listen for the CounterChangedWithTimestamp event
+        counterContract.on("CounterChangedWithTimestamp", (newCount, ts) => {
+          setTimestamp(ts.toString());
+        });
 
       } catch (err) {
         console.error(err);
@@ -91,7 +96,7 @@ function App() {
     if (!contract) return;
     setLoading(true);
     try {
-      const tx = await contract.increment();
+      const tx = await contract.increment({ value: ethers.parseEther("0.01") });
       await tx.wait();
       // The UI will be updated by the event listener, so we don't need to manually fetch the count here.
     } catch (err) {
@@ -105,7 +110,7 @@ function App() {
     if (!contract) return;
     setLoading(true);
     try {
-      const tx = await contract.decrement();
+      const tx = await contract.decrement({ value: ethers.parseEther("0.01") });
       await tx.wait();
       // The UI will be updated by the event listener, so we don't need to manually fetch the count here.
     } catch (err) {
@@ -116,39 +121,46 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={pic} alt="logo" />
-        <p className="description">A demo application to interact with a Solidity smart contract.</p>
-      </header>
-      <main className="App-main">
-        {!walletAddress ? (
-          <button onClick={connectWallet} className="connect-button" disabled={loading}>
-            {loading ? "Connecting..." : "Connect Wallet"}
-          </button>
-        ) : (
-          <div className="card">
-            <div className="account-info">
-              <p><strong>Connected Account:</strong> {`${walletAddress.substring(0, 6)}...${walletAddress.substring(walletAddress.length - 4)}`}</p>
-              <p><strong>Network:</strong> {network.name} (Chain ID: {network.chainId.toString()})</p>
-            </div>
-            <div className="counter-display">
-              <h2>Counter Value</h2>
-              <p className="count">{count}</p>
-            </div>
-            <div className="button-group">
-              <button onClick={increment} className="action-button" disabled={loading}>
-                {loading ? "Processing..." : "Increment"}
-              </button>
-              <button onClick={decrement} className="action-button" disabled={loading}>
-                {loading ? "Processing..." : "Decrement"}
-              </button>
-            </div>
-            <button onClick={disconnectWallet} className="disconnect-button">
-              Disconnect
+    <div className="Dashboard">
+      <aside className="Sidebar">
+        <div className="Sidebar-header">
+          <img src={pic} alt="logo" className="Sidebar-logo" />
+          <h1>Counter Dashboard</h1>
+        </div>
+        <div className="Sidebar-user">
+          {walletAddress ? (
+            <>
+              <p><strong>Account:</strong></p>
+              <p className="Sidebar-account">{`${walletAddress.substring(0, 6)}...${walletAddress.substring(walletAddress.length - 4)}`}</p>
+              <p><strong>Network:</strong></p>
+              <p className="Sidebar-network">{network ? `${network.name} (Chain ID: ${network.chainId.toString()})` : "Not connected"}</p>
+              <button onClick={disconnectWallet} className="disconnect-button">Disconnect</button>
+            </>
+          ) : (
+            <button onClick={connectWallet} className="connect-button" disabled={loading}>
+              {loading ? "Connecting..." : "Connect Wallet"}
+            </button>
+          )}
+        </div>
+      </aside>
+      <main className="Dashboard-main">
+        <div className="card">
+          <div className="counter-display">
+            <h2>Counter Value</h2>
+            <p className="count">{count}</p>
+            {timestamp && (
+              <p className="timestamp">Last change: {new Date(Number(timestamp) * 1000).toLocaleString()}</p>
+            )}
+          </div>
+          <div className="button-group">
+            <button onClick={increment} className="action-button" disabled={loading || !walletAddress}>
+              {loading ? "Processing..." : "Increment (0.01 ETH)"}
+            </button>
+            <button onClick={decrement} className="action-button" disabled={loading || !walletAddress}>
+              {loading ? "Processing..." : "Decrement (0.01 ETH)"}
             </button>
           </div>
-        )}
+        </div>
         {error && <p className="error-message">{error}</p>}
       </main>
     </div>
