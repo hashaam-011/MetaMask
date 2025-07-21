@@ -57,7 +57,7 @@ function App() {
   const fetchTransactionHistory = async (contractInstance) => {
     try {
       const history = await contractInstance.getTransactionHistory();
-      setTransactions(history);
+      setTransactions(JSON.parse(JSON.stringify(history)));
     } catch (err) {
       console.error("Failed to fetch transaction history:", err);
     }
