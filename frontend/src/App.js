@@ -183,6 +183,10 @@ function App() {
     await estimateGas(contract, functionName, value);
   };
 
+  const handleClearHistory = () => {
+    setTransactions([]);
+  };
+
   return (
     <div className="Dashboard">
       <aside className="Sidebar">
@@ -252,7 +256,7 @@ function App() {
           </div>
         </div>
         
-        <TransactionHistory transactions={transactions} loading={loading} />
+        <TransactionHistory transactions={transactions} loading={loading} onClearHistory={handleClearHistory} />
         
         {error && <p className="error-message">{error}</p>}
       </main>
